@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Plava Royalty Points System</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+        Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      margin: 0;
+      background-color: #f5f7fa;
+      color: #333;
+    }
+    header {
+      background-color: #004aad;
+      color: white;
+      padding: 1rem 2rem;
+      text-align: center;
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+    main {
+      max-width: 900px;
+      margin: 2rem auto;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgb(0 0 0 / 0.1);
+      padding: 2rem;
+    }
+    h2 {
+      color: #004aad;
+      margin-top: 0;
+    }
+    form {
+      margin-bottom: 2rem;
+    }
+    label {
+      display: block;
+      margin-bottom: 0.3rem;
+      font-weight: 600;
+    }
+    input, select, button, textarea {
+      width: 100%;
+      padding: 0.5rem;
+      margin-bottom: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 1rem;
+      box-sizing: border-box;
+    }
+    button {
+      background-color: #004aad;
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-weight: 700;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: #00337a;
+    }
+    .response {
+      background-color: #e6f0ff;
+      border: 1px solid #004aad;
+      padding: 1rem;
+      border-radius: 4px;
+      white-space: pre-wrap;
+      font-family: monospace;
+      max-height: 300px;
+      overflow-y: auto;
+    }
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+    nav button {
+      width: auto;
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+    }
+    .hidden {
+      display: none;
+    }
+    .info {
+      font-size: 0.9rem;
+      color: #666;
+      margin-bottom: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <header>Plava Royalty Points System</header>
+  <main>
+    <nav>
+      <button id="nav-health">Health Check</button>
+      <button id="nav-create">Create Unified Rewards</button>
+      <button id="nav-member">Member Registration</button>
+      <button id="nav-revenue">Generate Revenue</button>
+      <button id="nav-growth">Support Future Growth</button>
+    </nav>
+
+    <section id="section-health">
+      <h2>System Health Check</h2>
+      <p class="info">Check if the system is up and running.</p>
+      <button id="btn-health">Check Health</button>
+      <div id="health-response" class="response" aria-live="polite"></div>
+    </section>
+
+    <section id="section-create" class="hidden">
+      <h2>Create a Seamless, Unified Rewards Experience</h2>
+      <p class="info">Create a seamless, unified rewards experience for customers and merchants.</p>
+      <form id="form-create">
+        <label for="create-name">Merchant or Customer Name</label>
+        <input type="text" id="create-name" name="name" placeholder="Enter name" required />
+
+        <label for="create-type">Type</label>
+        <select id="create-type" name="type" required>
+          <option value="customer">Customer</option>
+          <option value="merchant">Merchant</option>
+        </select>
+
+        <label for="create-details">Additional Details</label>
+        <textarea id="create-details" name="details" rows="3" placeholder="Optional details"></textarea>
+
+        <button type="submit">Create</button>
+      </form>
+      <div id="create-response" class="response" aria-live="polite"></div>
+    </section>
+
+    <section id="section-member" class="hidden">
+      <h2>Enable Easy Member Registration</h2>
+      <p class="info">Enable easy member registration and secure transaction-based point allocation.</p>
+      <button id="btn-member">Load Member Registration Info</button>
+      <div id="member-response" class="response" aria-live="polite"></div>
+    </section>
+
+    <section id="section-revenue" class="hidden">
+      <h2>Generate Recurring Revenue</h2>
+      <p class="info">Generate recurring revenue through merchant subscriptions and transaction fees.</p>
+      <button id="btn-revenue">Load Revenue Info</button>
+      <div id="revenue-response" class="response" aria-live="polite"></div>
+    </section>
+
+    <section id="section-growth" class="hidden">
+      <h2>Support Future Growth</h2>
+      <p class="info">Support future growth with scalable cloud infrastructure and integrations.</p>
+      <button id="btn-growth">Load Growth Info</button>
+      <div id="growth-response" class="response" aria-live="polite"></div>
+    </section>
+  </main>
+
+  <script>
+    // Navigation buttons
+    const navButtons = {
+      health: document.getElementById('nav-health'),
+      create: document.getElementById('nav-create'),
+      member: document.getElementById('nav-member'),
+      revenue: document.getElementById('nav-revenue'),
+      growth: document.getElementById('nav-growth'),
+    };
+
+    // Sections
+    const sections = {
+      health: document.getElementById('section-health'),
+      create: document.getElementById('section-create'),
+      member: document.getElementById('section-member'),
+      revenue: document.getElementById('section-revenue'),
+      growth: document.getElementById('section-growth'),
+    };
+
+    function showSection(name) {
+      Object.keys(sections).forEach(key => {
+        if (key === name) {
+          sections[key].classList.remove('hidden');
+        } else {
+          sections[key].classList.add('hidden');
+        }
+      });
+    }
+
+    navButtons.health.addEventListener('click', () => {
+      showSection('health');
+    });
+    navButtons.create.addEventListener('click', () => {
+      showSection('create');
+    });
+    navButtons.member.addEventListener('click', () => {
+      showSection('member');
+    });
+    navButtons.revenue.addEventListener('click', () => {
+      showSection('revenue');
+    });
+    navButtons.growth.addEventListener('click', () => {
+      showSection('growth');
+    });
+
+    // Health Check
+    const btnHealth = document.getElementById('btn-health');
+    const healthResponse = document.getElementById('health-response');
+    btnHealth.addEventListener('click', async () => {
+      healthResponse.textContent = 'Checking...';
+      try {
+        const res = await fetch('/health');
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const text = await res.text();
+        healthResponse.textContent = `Status: ${text}`;
+      } catch (err) {
+        healthResponse.textContent = `Error: ${err.message}`;
+      }
+    });
+
+    // Create Unified Rewards
+    const formCreate = document.getElementById('form-create');
+    const createResponse = document.getElementById('create-response');
+    formCreate.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      createResponse.textContent = 'Submitting...';
+      const name = formCreate.name.value.trim();
+      const type = formCreate.type.value;
+      const details = formCreate.details.value.trim();
+
+      const payload = {
+        name,
+        type,
+        details,
+      };
+
+      try {
+        const res = await fetch('/api/create-a-seamless-unified-re', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(payload),
+        });
+        if (!res.ok) {
+          const errText = await res.text();
+          throw new Error(`HTTP ${res.status}: ${errText}`);
+        }
+        const data = await res.json();
+        createResponse.textContent = JSON.stringify(data, null, 2);
+      } catch (err) {
+        createResponse.textContent = `Error: ${err.message}`;
+      }
+    });
+
+    // Enable Easy Member Registration
+    const btnMember = document.getElementById('btn-member');
+    const memberResponse = document.getElementById('member-response');
+    btnMember.addEventListener('click', async () => {
+      memberResponse.textContent = 'Loading...';
+      try {
+        const res = await fetch('/api/enable-easy-member-registrat');
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const data = await res.json();
+        memberResponse.textContent = JSON.stringify(data, null, 2);
+      } catch (err) {
+        memberResponse.textContent = `Error: ${err.message}`;
+      }
+    });
+
+    // Generate Recurring Revenue
+    const btnRevenue = document.getElementById('btn-revenue');
+    const revenueResponse = document.getElementById('revenue-response');
+    btnRevenue.addEventListener('click', async () => {
+      revenueResponse.textContent = 'Loading...';
+      try {
+        const res = await fetch('/api/generate-recurring-revenue-t');
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const data = await res.json();
+        revenueResponse.textContent = JSON.stringify(data, null, 2);
+      } catch (err) {
+        revenueResponse.textContent = `Error: ${err.message}`;
+      }
+    });
+
+    // Support Future Growth
+    const btnGrowth = document.getElementById('btn-growth');
+    const growthResponse = document.getElementById('growth-response');
+    btnGrowth.addEventListener('click', async () => {
+      growthResponse.textContent = 'Loading...';
+      try {
+        const res = await fetch('/api/support-future-growth-with-s');
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const data = await res.json();
+        growthResponse.textContent = JSON.stringify(data, null, 2);
+      } catch (err) {
+        growthResponse.textContent = `Error: ${err.message}`;
+      }
+    });
+
+    // Show health section by default
+    showSection('health');
+  </script>
+</body>
+</html>

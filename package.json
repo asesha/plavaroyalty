@@ -1,0 +1,9 @@
+{
+  "name": "plava-royalty-points-system",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node src/app.js",
+    "test": "node --test"
+  }
+}
